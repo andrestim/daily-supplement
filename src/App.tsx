@@ -3,11 +3,7 @@ import {
   dailyMenu,
   psylliumRules,
   specialSituations,
-  pausedItems,
-  discardItems,
   backupItems,
-  doNotBuyNow,
-  futureMaybe,
   clinicPriorities,
   coreLine,
   mwfHighlights,
@@ -51,7 +47,7 @@ export default function App() {
         <Section
           emoji="🔎"
           title="快速查分類"
-          description="輸入品項名稱，立即知道它目前屬於：日常、條件式、暫停、備用或丟掉。"
+          description="輸入品項名稱，立即知道它目前屬於：日常、條件式或備用。"
         >
           <SearchPanel />
         </Section>
@@ -169,43 +165,6 @@ export default function App() {
           </div>
         </Section>
 
-        {/* 暫停不用 */}
-        <Section
-          emoji="⏸️"
-          title="目前暫停不用"
-          description="以下品項目前不進主菜單。"
-        >
-          <div className="flex flex-wrap gap-2">
-            {pausedItems.map((name) => (
-              <span
-                key={name}
-                className="rounded-full bg-amber-50 px-3 py-1.5 text-sm text-amber-800 ring-1 ring-inset ring-amber-200"
-              >
-                {name}
-              </span>
-            ))}
-          </div>
-        </Section>
-
-        {/* 建議丟掉 / 淘汰 */}
-        <Section
-          emoji="🗑️"
-          title="建議丟掉 / 淘汰"
-          description="過期、無標示或保存不確定的，整理掉。"
-        >
-          <ul className="space-y-2">
-            {discardItems.map((name) => (
-              <li
-                key={name}
-                className="flex items-center gap-2 rounded-xl border border-rose-100 bg-rose-50/60 px-3 py-2 text-sm text-rose-700"
-              >
-                <span aria-hidden>✕</span>
-                {name}
-              </li>
-            ))}
-          </ul>
-        </Section>
-
         {/* 備用區 */}
         <Section
           emoji="📦"
@@ -221,40 +180,6 @@ export default function App() {
                 <p className="text-sm font-medium text-slate-800">{b.name}</p>
                 {b.note && (
                   <p className="mt-0.5 text-xs text-slate-500">{b.note}</p>
-                )}
-              </li>
-            ))}
-          </ul>
-        </Section>
-
-        {/* 目前不建議新增購買 */}
-        <Section
-          emoji="🛑"
-          title="目前不建議新增購買"
-          description="先不要買；未來可視抽血或症狀再評估。"
-        >
-          <div className="mb-3 flex flex-wrap gap-2">
-            {doNotBuyNow.map((name) => (
-              <span
-                key={name}
-                className="rounded-full bg-slate-100 px-3 py-1.5 text-sm text-slate-600 ring-1 ring-inset ring-slate-200"
-              >
-                {name}
-              </span>
-            ))}
-          </div>
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400">
-            未來可視抽血 / 症狀考慮
-          </p>
-          <ul className="space-y-2">
-            {futureMaybe.map((f) => (
-              <li
-                key={f.name}
-                className="rounded-xl border border-emerald-100 bg-emerald-50/50 px-3 py-2.5"
-              >
-                <p className="text-sm font-medium text-slate-800">{f.name}</p>
-                {f.note && (
-                  <p className="mt-0.5 text-xs text-slate-500">{f.note}</p>
                 )}
               </li>
             ))}

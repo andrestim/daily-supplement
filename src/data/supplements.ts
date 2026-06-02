@@ -176,39 +176,7 @@ export const specialSituations: SpecialSituation[] = [
 ]
 
 // =============================================================
-// 四、目前暫停不用（不進主菜單）
-// =============================================================
-export const pausedItems: string[] = [
-  'Prelox',
-  'Steel-Libido Red',
-  'DHC Maca',
-  '戰神黑瑪卡',
-  '藥師健生活三十而力',
-  '皇弟萬睡 3.0',
-  'PillBox Onaka',
-  '船井 burner',
-  'Foodology 小藍瓶',
-  'Simply Super 夜酵素 DX',
-  '好立善綜合維他命發泡錠',
-  'ORIN 紅石榴汁（作為日常保健飲）',
-  '雞精 / 蜆精（日常飲用）',
-]
-
-// =============================================================
-// 五、建議丟掉 / 淘汰
-// =============================================================
-export const discardItems: string[] = [
-  '無標示膠囊',
-  '過期 PhytoMulti',
-  '好立善鐵+C+B 發泡錠',
-  '船井 burner',
-  'Foodology 小藍瓶',
-  'Simply Super 夜酵素 DX',
-  '保存不確定或開封太久的 ORIN 石榴汁',
-]
-
-// =============================================================
-// 六、備用區（可留，但不要日常吃）
+// 四、備用區（可留，但不要日常吃）
 // =============================================================
 export const backupItems: NamedNote[] = [
   { name: 'Dr.Brian Mini rTG Omega-3', note: 'Blackmores 魚油吃完後接' },
@@ -228,27 +196,7 @@ export const backupItems: NamedNote[] = [
 ]
 
 // =============================================================
-// 七、目前不建議新增購買
-// =============================================================
-export const doNotBuyNow: string[] = [
-  '紅麴',
-  '護肝複方',
-  '燃脂類',
-  '男性功能複方',
-  '高劑量魚油',
-  '含鐵綜合維他命',
-  '高劑量維生素 C',
-  '高劑量維生素 E',
-]
-
-export const futureMaybe: NamedNote[] = [
-  { name: '維生素 D', note: '先驗 25-OH Vitamin D，低再補' },
-  { name: '鎂甘胺酸', note: '睡眠、壓力、肌肉緊繃明顯時再考慮' },
-  { name: '植物固醇', note: '可和醫師討論是否作 LDL 輔助' },
-]
-
-// =============================================================
-// 八、看診優先順序
+// 五、看診優先順序
 // =============================================================
 export const clinicPriorities: ClinicPriority[] = [
   {
@@ -269,7 +217,7 @@ export const clinicPriorities: ClinicPriority[] = [
 ]
 
 // =============================================================
-// 九、目前核心主線
+// 六、目前核心主線
 // =============================================================
 export const coreLine = {
   menu: '燕麥 + 洋車前子 + 葉黃素 + 肌酸 + 魚油 1 顆 + DHC 高尿酸值對策 + 益生菌 + 週一三五鋅。',
@@ -309,8 +257,6 @@ function buildSearchIndex(): SearchEntry[] {
   ]
   conditionalNames.forEach((n) => push(n, 'conditional', '特殊狀況'))
 
-  pausedItems.forEach((n) => push(n, 'paused', '暫停不用'))
-  discardItems.forEach((n) => push(n, 'discard', '建議丟掉'))
   backupItems.forEach((b) => push(b.name, 'backup', '備用區'))
 
   return entries

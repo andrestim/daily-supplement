@@ -70,7 +70,7 @@ export const dailyMenu: MenuSlot[] = [
       {
         id: 'dhc-uric',
         name: 'DHC 高尿酸值對策',
-        dose: '通常每日 2 顆',
+        dose: '1 顆',
         note: '依包裝指示',
       },
     ],

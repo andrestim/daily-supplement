@@ -254,17 +254,17 @@ export const clinicPriorities: ClinicPriority[] = [
   {
     rank: 1,
     dept: '內分泌暨新陳代謝科 / 心臟內科',
-    reason: '處理 LDL 223、ApoB 157、高膽固醇風險',
+    reason: '處理 LDL / ApoB 偏高、高膽固醇風險',
   },
   {
     rank: 2,
     dept: '胃腸肝膽科',
-    reason: '處理脂肪肝、ALT/GGT、Ferritin 507',
+    reason: '處理脂肪肝、肝功能指數 (ALT/GGT)、Ferritin 偏高',
   },
   {
     rank: 3,
     dept: '風濕過敏免疫科',
-    reason: '處理尿酸 9.5',
+    reason: '處理尿酸偏高',
   },
 ]
 

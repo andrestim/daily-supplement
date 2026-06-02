@@ -1,0 +1,20 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{ts,tsx}'],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: [
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"Segoe UI"',
+          '"PingFang TC"',
+          '"Noto Sans TC"',
+          '"Microsoft JhengHei"',
+          'sans-serif',
+        ],
+      },
+    },
+  },
+  plugins: [],
+}

@@ -17,7 +17,7 @@ export default function TodaySummary({ now }: { now: Date }) {
         : '今天無洋車前子與鋅'
 
   return (
-    <div className="rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 p-5 text-white shadow-md">
+    <div className="rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-700 p-5 text-white shadow-lg shadow-emerald-900/30 ring-1 ring-inset ring-white/10">
       <p className="text-sm font-medium text-emerald-50/90">今日摘要</p>
       <h1 className="mt-1 text-2xl font-bold tracking-tight">{prettyDate(now)}</h1>
 

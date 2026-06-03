@@ -22,16 +22,16 @@ export default function Section({
   return (
     <section
       id={id}
-      className="scroll-mt-4 rounded-2xl border border-slate-200/70 bg-white/80 p-4 shadow-sm backdrop-blur-sm sm:p-5"
+      className="scroll-mt-4 rounded-2xl border border-slate-700/60 bg-slate-900/60 p-4 shadow-lg shadow-black/20 backdrop-blur-sm sm:p-5"
     >
       <header className="mb-3 flex items-start justify-between gap-3">
         <div>
-          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-800">
+          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-100">
             {emoji && <span aria-hidden>{emoji}</span>}
             <span>{title}</span>
           </h2>
           {description && (
-            <p className="mt-1 text-sm leading-relaxed text-slate-500">
+            <p className="mt-1 text-sm leading-relaxed text-slate-400">
               {description}
             </p>
           )}

@@ -13,7 +13,7 @@ export function CategoryBadge({ category }: { category: Category }) {
 
 export function Pill({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-1 text-sm text-slate-700 ring-1 ring-inset ring-slate-200">
+    <span className="inline-flex items-center rounded-full bg-slate-700/50 px-2.5 py-1 text-sm text-slate-200 ring-1 ring-inset ring-slate-600">
       {children}
     </span>
   )

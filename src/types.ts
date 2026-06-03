@@ -12,11 +12,11 @@ export const CATEGORY_LABELS: Record<Category, string> = {
 }
 
 export const CATEGORY_STYLES: Record<Category, string> = {
-  daily: 'bg-emerald-100 text-emerald-800 ring-emerald-200',
-  conditional: 'bg-sky-100 text-sky-800 ring-sky-200',
-  paused: 'bg-amber-100 text-amber-800 ring-amber-200',
-  backup: 'bg-slate-100 text-slate-700 ring-slate-200',
-  discard: 'bg-rose-100 text-rose-700 ring-rose-200',
+  daily: 'bg-emerald-500/15 text-emerald-300 ring-emerald-500/30',
+  conditional: 'bg-sky-500/15 text-sky-300 ring-sky-500/30',
+  paused: 'bg-amber-500/15 text-amber-300 ring-amber-500/30',
+  backup: 'bg-slate-600/30 text-slate-300 ring-slate-600',
+  discard: 'bg-rose-500/15 text-rose-300 ring-rose-500/30',
 }
 
 // 每日菜單中的單一項目

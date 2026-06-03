@@ -6,9 +6,8 @@ import {
   backupItems,
   clinicPriorities,
   coreLine,
-  mwfHighlights,
+  weeklySchedule,
 } from './data/supplements'
-import { isMwf } from './lib/date'
 import { useDailyChecklist } from './hooks/useDailyChecklist'
 import Section from './components/Section'
 import TodaySummary from './components/TodaySummary'
@@ -23,16 +22,16 @@ const rankStyles: Record<number, string> = {
 
 export default function App() {
   const now = useMemo(() => new Date(), [])
-  const mwf = isMwf(now)
+  const day = now.getDay() // 0=日 … 6=六
   const { isChecked, toggle, reset } = useDailyChecklist()
 
-  // 今日實際要勾的項目 id（mwfOnly 只在週一三五算進去）
+  // 今日實際要勾的項目 id（有指定星期的，只在符合的日子算進去）
   const todayItemIds = useMemo(
     () =>
       dailyMenu.flatMap((slot) =>
-        slot.items.filter((i) => !i.mwfOnly || mwf).map((i) => i.id),
+        slot.items.filter((i) => !i.days || i.days.includes(day)).map((i) => i.id),
       ),
-    [mwf],
+    [day],
   )
   const doneCount = todayItemIds.filter((id) => isChecked(id)).length
   const total = todayItemIds.length
@@ -77,29 +76,45 @@ export default function App() {
             </div>
           }
         >
-          <DailyChecklist isMwf={mwf} isChecked={isChecked} toggle={toggle} />
+          <DailyChecklist day={day} isChecked={isChecked} toggle={toggle} />
         </Section>
 
-        {/* 週一三五固定項目 */}
+        {/* 每週固定項目（非每天） */}
         <Section
           emoji="📌"
-          title="週一 / 三 / 五 固定項目"
-          description={
-            mwf ? '今天就是週一三五，記得加這兩項。' : '非週一三五日，今天先略過。'
-          }
+          title="每週固定項目"
+          description="洋車前子（週一 / 三 / 五）與鋅（僅週三）。今天適用的會標示「今天」。"
         >
           <ul className="space-y-2">
-            {mwfHighlights.map((h) => (
-              <li
-                key={h.time}
-                className="flex items-start gap-3 rounded-xl border border-sky-100 bg-sky-50/60 px-3 py-2.5"
-              >
-                <span className="rounded-md bg-sky-100 px-2 py-0.5 text-xs font-semibold text-sky-700">
-                  {h.time}
-                </span>
-                <span className="text-sm text-slate-700">{h.text}</span>
-              </li>
-            ))}
+            {weeklySchedule.map((w) => {
+              const today = w.days.includes(day)
+              return (
+                <li
+                  key={w.id}
+                  className={`flex items-start gap-3 rounded-xl border px-3 py-2.5 ${
+                    today
+                      ? 'border-emerald-200 bg-emerald-50/70'
+                      : 'border-slate-200 bg-white'
+                  }`}
+                >
+                  <span
+                    className={`shrink-0 rounded-md px-2 py-0.5 text-xs font-semibold ${
+                      today
+                        ? 'bg-emerald-100 text-emerald-700'
+                        : 'bg-sky-100 text-sky-700'
+                    }`}
+                  >
+                    {w.time}
+                  </span>
+                  <span className="text-sm text-slate-700">{w.text}</span>
+                  {today && (
+                    <span className="ml-auto shrink-0 self-center rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-semibold text-emerald-700">
+                      今天
+                    </span>
+                  )}
+                </li>
+              )
+            })}
           </ul>
         </Section>
 

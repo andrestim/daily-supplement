@@ -1,8 +1,10 @@
 import { dailyMenu } from '../data/supplements'
 import type { MenuItem } from '../types'
+import { daysLabel } from '../lib/date'
 
 interface Props {
-  isMwf: boolean
+  /** 今天星期幾（0=日 … 6=六） */
+  day: number
   isChecked: (id: string) => boolean
   toggle: (id: string) => void
 }
@@ -18,7 +20,9 @@ function Row({
   checked: boolean
   onToggle: () => void
 }) {
-  // mwfOnly 但今天非週一三五 → 顯示為灰階、不可勾選
+  const label = item.days ? daysLabel(item.days) : ''
+
+  // 有指定星期、但今天不在範圍 → 顯示為灰階、不可勾選
   if (!active) {
     return (
       <div className="flex items-start gap-3 rounded-xl border border-dashed border-slate-200 bg-slate-50/60 px-3 py-2.5 opacity-70">
@@ -30,7 +34,7 @@ function Row({
             <span className="line-through decoration-slate-300">{item.name}</span>
             {item.dose && <span className="text-slate-400">{item.dose}</span>}
             <span className="rounded-full bg-amber-100 px-1.5 py-0.5 text-[11px] font-medium text-amber-700">
-              僅週一三五・今日不用
+              僅{label}・今日不用
             </span>
           </p>
         </div>
@@ -60,9 +64,9 @@ function Row({
           {item.dose && (
             <span className="font-semibold text-emerald-700">{item.dose}</span>
           )}
-          {item.mwfOnly && (
+          {item.days && (
             <span className="rounded-full bg-sky-100 px-1.5 py-0.5 text-[11px] font-medium text-sky-700">
-              週一三五
+              {label}
             </span>
           )}
         </p>
@@ -77,7 +81,7 @@ function Row({
 }
 
 // 每日菜單 + 今日完成 checkbox
-export default function DailyChecklist({ isMwf, isChecked, toggle }: Props) {
+export default function DailyChecklist({ day, isChecked, toggle }: Props) {
   return (
     <div className="space-y-4">
       {dailyMenu.map((slot) => (
@@ -88,7 +92,7 @@ export default function DailyChecklist({ isMwf, isChecked, toggle }: Props) {
           </h3>
           <div className="space-y-2">
             {slot.items.map((item) => {
-              const active = !item.mwfOnly || isMwf
+              const active = !item.days || item.days.includes(day)
               return (
                 <Row
                   key={item.id}

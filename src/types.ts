@@ -25,7 +25,9 @@ export interface MenuItem {
   name: string
   dose?: string
   note?: string
-  mwfOnly?: boolean // true = 僅週一/三/五
+  // 指定僅在某些星期幾服用（0=日,1=一,…,6=六）。未設定 = 每天。
+  // 例：洋車前子 [1,3,5]（週一三五）、鋅 [3]（僅週三）
+  days?: number[]
 }
 
 // 每日菜單的時段（早餐、午餐後…）

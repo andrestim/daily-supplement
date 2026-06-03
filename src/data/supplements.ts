@@ -32,7 +32,7 @@ export const dailyMenu: MenuSlot[] = [
         name: 'NOW 洋車前子殼粉',
         dose: '1/2 茶匙',
         note: '搭配 300–500ml 水，攪拌後馬上喝完。與藥物、過敏藥、保健品錯開至少 2 小時。',
-        mwfOnly: true,
+        days: [1, 3, 5],
       },
     ],
   },
@@ -43,10 +43,10 @@ export const dailyMenu: MenuSlot[] = [
       { id: 'lutein', name: '三倍堅金盞花葉黃素', dose: '1 顆' },
       {
         id: 'zinc',
-        name: 'Thorne 甘氨酸鋅 15mg',
+        name: 'Thorne Zinc Picolinate 30mg',
         dose: '1 顆',
-        note: '僅週一 / 三 / 五',
-        mwfOnly: true,
+        note: '僅週三（30mg 接近成人上限 40mg/day，故降頻）',
+        days: [3],
       },
     ],
   },
@@ -82,10 +82,26 @@ export const dailyMenu: MenuSlot[] = [
   },
 ]
 
-// 週一 / 三 / 五 額外固定項目（摘要用）
-export const mwfHighlights: { time: string; text: string }[] = [
-  { time: '10:30', text: 'NOW 洋車前子殼粉 1/2 茶匙 + 300–500ml 水' },
-  { time: '午餐後', text: 'Thorne 甘氨酸鋅 15mg 1 顆' },
+// 週期固定項目（非每天）：今日摘要與「每週固定項目」區塊共用
+// 洋車前子＝週一/三/五；鋅＝僅週三
+export const weeklySchedule: {
+  id: string
+  days: number[]
+  time: string
+  text: string
+}[] = [
+  {
+    id: 'psyllium',
+    days: [1, 3, 5],
+    time: '週一/三/五 10:30',
+    text: 'NOW 洋車前子殼粉 1/2 茶匙 + 300–500ml 水',
+  },
+  {
+    id: 'zinc',
+    days: [3],
+    time: '週三 午餐後',
+    text: 'Thorne Zinc Picolinate 30mg 1 顆',
+  },
 ]
 
 // =============================================================
@@ -220,8 +236,9 @@ export const clinicPriorities: ClinicPriority[] = [
 // 六、目前核心主線
 // =============================================================
 export const coreLine = {
-  menu: '燕麥 + 洋車前子 + 葉黃素 + 肌酸 + 魚油 1 顆 + DHC 高尿酸值對策 + 益生菌 + 週一三五鋅。',
+  menu: '燕麥 + 洋車前子 + 葉黃素 + 肌酸 + 魚油 1 顆 + DHC 高尿酸值對策 + 益生菌 + 每週一次鋅 30mg。',
   notes: [
+    '鋅從週一三五改成每週三一次（Thorne Zinc Picolinate 30mg，避免接近 40mg/day 上限）。',
     '南瓜籽油吃完後先停，不續買。',
     'Prelox、Steel-Libido、馬卡、燃脂、護肝複方全部暫停。',
     '接下來真正優先是看診處理 LDL/ApoB、肝指數、Ferritin 與尿酸。',
@@ -239,7 +256,7 @@ function buildSearchIndex(): SearchEntry[] {
   // 日常 / 條件式（每日菜單）
   dailyMenu.forEach((slot) => {
     slot.items.forEach((item) => {
-      const category: Category = item.mwfOnly ? 'conditional' : 'daily'
+      const category: Category = item.days ? 'conditional' : 'daily'
       push(item.name, category, `每日菜單・${slot.time}`)
     })
   })
